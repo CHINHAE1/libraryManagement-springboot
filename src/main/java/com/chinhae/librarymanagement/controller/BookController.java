@@ -1,13 +1,11 @@
 package com.chinhae.librarymanagement.controller;
 
 import com.chinhae.librarymanagement.entity.Book;
-import com.chinhae.librarymanagement.entity.Result;
+import com.chinhae.librarymanagement.result.Result;
 import com.chinhae.librarymanagement.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**

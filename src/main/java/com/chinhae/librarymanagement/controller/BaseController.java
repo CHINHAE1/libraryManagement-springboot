@@ -1,6 +1,5 @@
 package com.chinhae.librarymanagement.controller;
 
-import com.chinhae.librarymanagement.entity.Result;
 import com.chinhae.librarymanagement.entity.User;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;

@@ -1,7 +1,7 @@
 package com.chinhae.librarymanagement.service;
 
 import com.chinhae.librarymanagement.entity.Book;
-import com.chinhae.librarymanagement.entity.Result;
+import com.chinhae.librarymanagement.result.Result;
 
 import java.util.List;
 

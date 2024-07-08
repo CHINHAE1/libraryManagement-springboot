@@ -1,13 +1,12 @@
 package com.chinhae.librarymanagement.service.impl;
 
-import com.chinhae.librarymanagement.entity.Result;
+import com.chinhae.librarymanagement.result.Result;
 import com.chinhae.librarymanagement.entity.User;
 import com.chinhae.librarymanagement.mapper.UserMapper;
 import com.chinhae.librarymanagement.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.DigestUtils;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -48,23 +47,6 @@ public class UserServiceImpl implements UserService {
         return Result.success(user);
     }
 
-    @Override
-    public Result validateUserCredentials(String userName, String password) {
-        // 检查输入参数是否为空
-        if (userName == null || userName.isEmpty() || password == null || password.isEmpty()) {
-            return Result.error("用户名或密码不能为空");
-        }
-
-        User user = userMapper.queryByUsername(userName);
-        if (user == null) {
-            return Result.error("用户不存在");
-        }
-        // 直接比对数据库中的密码和输入的密码
-        if (!user.getPassword().equals(password)) {
-            return Result.error("用户名或密码错误");
-        }
-        return Result.success(user);
-    }
 
 
     /**

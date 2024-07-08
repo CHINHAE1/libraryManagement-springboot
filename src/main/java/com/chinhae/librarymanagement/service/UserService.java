@@ -1,6 +1,6 @@
 package com.chinhae.librarymanagement.service;
 
-import com.chinhae.librarymanagement.entity.Result;
+import com.chinhae.librarymanagement.result.Result;
 import com.chinhae.librarymanagement.entity.User;
 
 import java.math.BigDecimal;
@@ -24,7 +24,6 @@ public interface UserService {
     Result rechargeUserByUsername(String userName, BigDecimal amount);
 
 
-    Result validateUserCredentials(String userName, String password);
 
 
     /**

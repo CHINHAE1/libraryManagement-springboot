@@ -1,7 +1,7 @@
 package com.chinhae.librarymanagement.controller;
 
 
-import com.chinhae.librarymanagement.entity.Result;
+import com.chinhae.librarymanagement.result.Result;
 import com.chinhae.librarymanagement.entity.User;
 import com.chinhae.librarymanagement.service.UserService;
 import com.chinhae.librarymanagement.utils.ResultTools;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,54 +27,12 @@ import java.util.Map;
 @Slf4j
 @RestController
 @RequestMapping("/users")
-public class UserController extends BaseController{
+public class UserController {
     /**
      * 服务对象
      */
     @Autowired
     private UserService userService;
-
-    /**
-     * 登录
-     *  @param userName
-     *  @param password
-     */
-    @PostMapping("/login")
-    public Result login(@RequestParam String userName, @RequestParam String password) {
-        log.info("登录, userName:{}, password:{}", userName, password);
-        try {
-            Result result = userService.validateUserCredentials(userName, password);
-            if (result.getCode() == 1) {
-                User user = (User) result.getData();
-                setUser(user);
-                Map<String,Object> map = new HashMap<>();
-                map.put("user", user);
-                return ResultTools.result(0, "登录成功", map);
-            } else {
-                return result;
-            }
-        } catch (Exception e) {
-            return ResultTools.result(404, e.getMessage(), null);
-        }
-    }
-
-    /***
-     * 获取用户
-     */
-    @GetMapping("/getUser")
-    public Result getLoginUser() {
-        try {
-            Map<String, Object> map = new HashMap<>(1);
-            User user = getUser();
-            if (user == null) {
-                return ResultTools.result(1002, "登录信息失效", map);
-            }
-            map.put("user", user);
-            return ResultTools.result(0, "成功", map);
-        } catch (Exception e) {
-            return ResultTools.result(404, e.getMessage(), null);
-        }
-    }
 
 
     /**

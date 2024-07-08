@@ -1,7 +1,7 @@
 package com.chinhae.librarymanagement.service.impl;
 
 import com.chinhae.librarymanagement.entity.Book;
-import com.chinhae.librarymanagement.entity.Result;
+import com.chinhae.librarymanagement.result.Result;
 import com.chinhae.librarymanagement.mapper.BookMapper;
 import com.chinhae.librarymanagement.mapper.UserMapper;
 import com.chinhae.librarymanagement.service.BookService;

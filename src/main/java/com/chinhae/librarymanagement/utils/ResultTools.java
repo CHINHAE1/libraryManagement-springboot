@@ -1,6 +1,6 @@
 package com.chinhae.librarymanagement.utils;
 
-import com.chinhae.librarymanagement.entity.Result;
+import com.chinhae.librarymanagement.result.Result;
 
 /**
  * 这个类是：

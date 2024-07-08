@@ -1,4 +1,4 @@
-package com.chinhae.librarymanagement.entity;
+package com.chinhae.librarymanagement.result;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
