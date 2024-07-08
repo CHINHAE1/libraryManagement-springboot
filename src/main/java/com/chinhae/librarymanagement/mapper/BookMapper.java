@@ -25,6 +25,10 @@ public interface BookMapper {
     @Select("SELECT * FROM book")
     List<Book> queryAllBooks();
 
+
+    @Update("UPDATE book SET stock = stock - #{quantity} WHERE bookID = #{bookID}")
+    void updateStock(@Param("bookID") int bookID, @Param("quantity") int quantity);
+
     // 根据书籍编号查询书籍
     @Select("SELECT * FROM Book WHERE bookID = #{bookID}")
     Book queryById(@Param("bookID") int bookID);
@@ -34,7 +38,7 @@ public interface BookMapper {
     Book queryByName(@Param("bookName") String bookName);
 
     // 更新库存
-    @Update("UPDATE Book SET stock = #{stock} WHERE bookID = #{bookID}")
-    void updateStock(Book book);
+    /*@Update("UPDATE Book SET stock = #{stock} WHERE bookID = #{bookID}")
+    void updateStock(Book book);*/
 }
 

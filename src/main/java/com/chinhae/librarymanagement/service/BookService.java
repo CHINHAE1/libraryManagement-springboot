@@ -1,6 +1,7 @@
 package com.chinhae.librarymanagement.service;
 
 import com.chinhae.librarymanagement.entity.Book;
+import com.chinhae.librarymanagement.entity.ShoppingCart;
 import com.chinhae.librarymanagement.result.Result;
 
 import java.util.List;
@@ -20,11 +21,17 @@ public interface BookService {
      */
     List<Book> getAllBooks();
 
+    Book getBookById(int bookID);
+
+    boolean checkUserBalance(int userID, double totalPrice);
+
+    Result checkout(int userID, ShoppingCart cart);
+
     // 根据书籍编号购买书籍
-    Result purchaseBookById(int userID, int bookID, int quantity);
+   // Result purchaseBookById(int userID, int bookID, int quantity);
 
     // 根据书籍名称购买书籍
-    Result purchaseBookByName(int userID, String bookName, int quantity);
+   // Result purchaseBookByName(int userID, String bookName, int quantity);
 
 
 
