@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinhae.librarymanagement.mapper.OrderitemrelationMapper">
+
+    <resultMap type="com.chinhae.librarymanagement.entity.Orderitemrelation" id="OrderitemrelationMap">
+        <result property="relationid" column="RelationID" jdbcType="INTEGER"/>
+        <result property="orderid" column="OrderID" jdbcType="INTEGER"/>
+        <result property="itemid" column="ItemID" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="OrderitemrelationMap">
+        select RelationIDOrderIDItemID
+        from orderitemrelation
+        where RelationID = #{relationid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="OrderitemrelationMap">
+        select
+        RelationIDOrderIDItemID
+        from orderitemrelation
+        <where>
+            <if test="relationid != null">
+                and RelationID = #{relationid}
+            </if>
+            <if test="orderid != null">
+                and OrderID = #{orderid}
+            </if>
+            <if test="itemid != null">
+                and ItemID = #{itemid}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from orderitemrelation
+        <where>
+            <if test="relationid != null">
+                and RelationID = #{relationid}
+            </if>
+            <if test="orderid != null">
+                and OrderID = #{orderid}
+            </if>
+            <if test="itemid != null">
+                and ItemID = #{itemid}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="relationid" useGeneratedKeys="true">
+        insert into orderitemrelation(OrderIDItemID)
+        values (#{orderid}#{itemid})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="relationid" useGeneratedKeys="true">
+        insert into orderitemrelation(OrderIDItemID)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.orderid}#{entity.itemid})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="relationid" useGeneratedKeys="true">
+        insert into orderitemrelation(OrderIDItemID)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.orderid}#{entity.itemid})
+        </foreach>
+        on duplicate key update
+        OrderID = values(OrderID)ItemID = values(ItemID)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update orderitemrelation
+        <set>
+            <if test="orderid != null">
+                OrderID = #{orderid},
+            </if>
+            <if test="itemid != null">
+                ItemID = #{itemid},
+            </if>
+        </set>
+        where RelationID = #{relationid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from orderitemrelation
+        where RelationID = #{relationid}
+    </delete>
+
+</mapper>
+

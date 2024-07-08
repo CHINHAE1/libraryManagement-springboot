@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinhae.librarymanagement.mapper.UserMapper">
+
+    <resultMap type="com.chinhae.librarymanagement.entity.User" id="UserMap">
+        <result property="userID" column="userID" jdbcType="INTEGER"/>
+        <result property="userName" column="userName" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="image" column="image" jdbcType="VARCHAR"/>
+        <result property="balance" column="balance" jdbcType="NUMERIC"/>
+        <result property="roleID" column="roleID" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="INTEGER"/>
+        <result property="updateTime" column="update_time" jdbcType="INTEGER"/>
+    </resultMap>
+
+
+    <!-- 检查用户名是否存在 -->
+    <select id="countByUsername" resultType="java.lang.Integer">
+        SELECT COUNT(1)
+        FROM user
+        WHERE userName = #{userName}
+    </select>
+
+
+
+    <!-- 新增用户 -->
+    <insert id="insert" parameterType="com.chinhae.librarymanagement.entity.User">
+        INSERT INTO user (userName, password, image, balance, roleID, create_time, update_time)
+        VALUES (#{userName}, #{password}, #{image}, #{balance}, #{roleID}, #{createTime}, #{updateTime});
+    </insert>
+
+
+</mapper>
+

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chinhae.librarymanagement.mapper.ItemMapper">
+
+    <resultMap type="com.chinhae.librarymanagement.entity.Item" id="ItemMap">
+        <result property="itemid" column="ItemID" jdbcType="INTEGER"/>
+        <result property="bookid" column="BookID" jdbcType="INTEGER"/>
+        <result property="itemname" column="ItemName" jdbcType="VARCHAR"/>
+        <result property="quantity" column="Quantity" jdbcType="INTEGER"/>
+        <result property="itemprice" column="ItemPrice" jdbcType="NUMERIC"/>
+        <result property="totalprice" column="TotalPrice" jdbcType="NUMERIC"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="ItemMap">
+        select ItemIDBookIDItemNameQuantityItemPriceTotalPrice
+        from item
+        where ItemID = #{itemid}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="ItemMap">
+        select
+        ItemIDBookIDItemNameQuantityItemPriceTotalPrice
+        from item
+        <where>
+            <if test="itemid != null">
+                and ItemID = #{itemid}
+            </if>
+            <if test="bookid != null">
+                and BookID = #{bookid}
+            </if>
+            <if test="itemname != null and itemname != ''">
+                and ItemName = #{itemname}
+            </if>
+            <if test="quantity != null">
+                and Quantity = #{quantity}
+            </if>
+            <if test="itemprice != null">
+                and ItemPrice = #{itemprice}
+            </if>
+            <if test="totalprice != null">
+                and TotalPrice = #{totalprice}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from item
+        <where>
+            <if test="itemid != null">
+                and ItemID = #{itemid}
+            </if>
+            <if test="bookid != null">
+                and BookID = #{bookid}
+            </if>
+            <if test="itemname != null and itemname != ''">
+                and ItemName = #{itemname}
+            </if>
+            <if test="quantity != null">
+                and Quantity = #{quantity}
+            </if>
+            <if test="itemprice != null">
+                and ItemPrice = #{itemprice}
+            </if>
+            <if test="totalprice != null">
+                and TotalPrice = #{totalprice}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="itemid" useGeneratedKeys="true">
+        insert into item(BookIDItemNameQuantityItemPriceTotalPrice)
+        values (#{bookid}#{itemname}#{quantity}#{itemprice}#{totalprice})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="itemid" useGeneratedKeys="true">
+        insert into item(BookIDItemNameQuantityItemPriceTotalPrice)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.bookid}#{entity.itemname}#{entity.quantity}#{entity.itemprice}#{entity.totalprice})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="itemid" useGeneratedKeys="true">
+        insert into item(BookIDItemNameQuantityItemPriceTotalPrice)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.bookid}#{entity.itemname}#{entity.quantity}#{entity.itemprice}#{entity.totalprice})
+        </foreach>
+        on duplicate key update
+        BookID = values(BookID)ItemName = values(ItemName)Quantity = values(Quantity)ItemPrice =
+        values(ItemPrice)TotalPrice = values(TotalPrice)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update item
+        <set>
+            <if test="bookid != null">
+                BookID = #{bookid},
+            </if>
+            <if test="itemname != null and itemname != ''">
+                ItemName = #{itemname},
+            </if>
+            <if test="quantity != null">
+                Quantity = #{quantity},
+            </if>
+            <if test="itemprice != null">
+                ItemPrice = #{itemprice},
+            </if>
+            <if test="totalprice != null">
+                TotalPrice = #{totalprice},
+            </if>
+        </set>
+        where ItemID = #{itemid}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete
+        from item
+        where ItemID = #{itemid}
+    </delete>
+
+</mapper>
+
