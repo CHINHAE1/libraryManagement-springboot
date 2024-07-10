@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 /**
  * (Book)实体类
- *
+ *  书籍表
  * @author CHINHAE
  * @since 2024-07-08 11:51:36
  */

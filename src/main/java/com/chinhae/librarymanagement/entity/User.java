@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 /**
  * (User)实体类
- *
+ *  用户表
  * @author CHINHAE
  * @since 2024-07-08 11:51:38
  */

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * (Role)实体类
- *
+ *  权限表
  * @author CHINHAE
  * @since 2024-07-08 11:51:37
  */

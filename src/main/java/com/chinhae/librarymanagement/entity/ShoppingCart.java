@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 这个类是：
+ * 这个类是：购物车
  *
  * @author: CHINHAE
  * @date: 2024/7/9 04:06

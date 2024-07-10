@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 /**
  * (Item)实体类
- *
+ *  商品表(订单单项表)
  * @author CHINHAE
  * @since 2024-07-08 11:51:37
  */

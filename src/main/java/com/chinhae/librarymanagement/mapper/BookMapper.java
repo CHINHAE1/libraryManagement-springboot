@@ -1,6 +1,7 @@
 package com.chinhae.librarymanagement.mapper;
 
 import com.chinhae.librarymanagement.entity.Book;
+import com.chinhae.librarymanagement.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
@@ -40,5 +41,21 @@ public interface BookMapper {
     // 更新库存
     /*@Update("UPDATE Book SET stock = #{stock} WHERE bookID = #{bookID}")
     void updateStock(Book book);*/
+
+    /**
+     * 新增数据
+     *
+     * @param book 实例对象
+     * @return 影响行数
+     */
+    void insert(Book book);
+
+    // 根据书籍名删除书籍
+    @Update("DELETE FROM Book WHERE bookName = #{bookName}")
+    void deleteByName(@Param("bookName") String bookName);
+
+    //  根据书籍名修改书籍信息
+    @Update("UPDATE Book SET image = #{image}, author = #{author}, type = #{type}, price = #{price}, stock = #{stock} WHERE bookName = #{bookName}")
+    void updateByName(Book book);
 }
 

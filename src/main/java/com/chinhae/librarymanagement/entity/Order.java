@@ -8,7 +8,7 @@ import java.util.Date;
 
 /**
  * (Order)实体类
- *
+ *  订单表
  * @author CHINHAE
  * @since 2024-07-08 11:51:37
  */

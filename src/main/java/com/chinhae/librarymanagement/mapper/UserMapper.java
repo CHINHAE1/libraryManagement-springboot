@@ -2,11 +2,14 @@ package com.chinhae.librarymanagement.mapper;
 
 import com.chinhae.librarymanagement.entity.Item;
 import com.chinhae.librarymanagement.entity.User;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
+
+import java.util.List;
 
 /**
  * (User)表数据库访问层
@@ -16,6 +19,10 @@ import org.apache.ibatis.annotations.Update;
  */
 @Mapper
 public interface UserMapper {
+
+    //  获取所有用户信息
+    @Select("SELECT * FROM user")
+    List<User> queryAllUsers();
 
     /**
      * 通过用户名统计用户数量
@@ -34,6 +41,24 @@ public interface UserMapper {
      */
     @Select("SELECT * FROM user WHERE userName = #{userName}")
     User queryByUsername(@Param("userName") String userName);
+
+    /**
+     * 通过用户id查询用户
+     *
+     * @param userID 用户名
+     * @return 用户实体
+     */
+    @Select("SELECT * FROM user WHERE userID = #{userID}")
+    User queryById(@Param("userID") int userID);
+
+
+    // 通过用户id删除用户
+    @Delete("DELETE FROM user WHERE userID = #{userID}")
+    void deleteById(@Param("userID") int userID);
+
+    // 根据用户id修改用户信息
+    @Update("UPDATE user SET userName = #{userName}, password = #{password}, email = #{email}, phone = #{phone}, address = #{address}, update_time = #{updateTime} WHERE userID = #{userID}")
+    void updateById(User user);
 
     /**
      * 更新用户余额
